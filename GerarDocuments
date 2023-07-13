@@ -38,7 +38,10 @@ Public Sub GerarDocumentos()
         
         ' Salvar o documento como PDF
         docWord.ExportAsFixedFormat OutputFileName:=docWord.Path & "\" & tr.Range(, 1) & ".pdf", ExportFormat:=wdExportFormatPDF
-        
+        ' Se quiser salvar em .docx use abaixo
+         'docWord.SaveAs2 docWord.Path & "\" & tr.Range(, 1) & ".docx"
+         'docWord.Close
+
         docWord.Close SaveChanges:=False
     Next
     
