@@ -1,0 +1,23 @@
+Sub SubstituirBarraPorPonto()
+    Dim ws As Worksheet
+    Dim rng As Range
+    Dim cell As Range
+    
+    ' Define a planilha em que o código será executado
+    Set ws = ThisWorkbook.Sheets("NOME DA PLANILHA")
+    'Substitua "Nome da Planilha" pelo nome da sua planilha
+    
+    ' Define o intervalo de células na coluna C
+    Set rng = ws.Range("C1:C" & ws.Cells(ws.Rows.Count, "C").End(xlUp).Row)
+    
+    ' Percorre cada célula no intervalo
+    For Each cell In rng
+        ' Verifica se a célula contém "/"
+        If InStr(cell.Value, "/") > 0 Then
+            ' Substitui "/" por "."
+            cell.Value = Replace(cell.Value, "/", ".")
+        End If
+    Next cell
+    
+    MsgBox "Substituição concluída."
+End Sub
