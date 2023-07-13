@@ -1,0 +1,51 @@
+Option Explicit
+
+Public Sub GerarDocumentos()
+    Dim docWord As Word.Document
+    Dim wordApp As Word.Application
+    Dim tb As ListObject
+    Dim tr As ListRow
+    
+    ' Desativar atualização automática do Excel
+    Application.ScreenUpdating = False
+    
+    ' Setar o objeto aplicação do Word, abrindo uma instância nova do Word (se necessário)
+    On Error Resume Next
+    Set wordApp = GetObject(, "Word.Application")
+    On Error GoTo 0
+    
+    If wordApp Is Nothing Then
+        Set wordApp = CreateObject("Word.Application")
+    End If
+    
+    ' Desativar a visibilidade do aplicativo Word
+    wordApp.Visible = False
+    
+    ' Setar a variável tb, lendo a tabela da planilha
+    Set tb = Planilha3.ListObjects("Tabela2")
+    
+    ' Loopar a tabela que está na planilha
+    For Each tr In tb.ListRows
+        ' Abrir o documento do Word
+        Set docWord = wordApp.Documents.Open("CAMINHO DO ARQUIVO NO COMPUTADOR")
+        
+        ' Preencher os bookmarks com os indicadores (Necessario o arquivo ter os indicadores (bookmarks) inseridos)
+        docWord.Bookmarks("Fornecedor").Range.Text = tr.Range(, 1)
+        docWord.Bookmarks("Qualidade").Range.Text = tr.Range(, 2)
+        docWord.Bookmarks("Logistica").Range.Text = tr.Range(, 3)
+        docWord.Bookmarks("Data").Range.Text = tr.Range(, 4)
+        docWord.Bookmarks("Periodo").Range.Text = tr.Range(, 5)
+        
+        ' Salvar o documento como PDF
+        docWord.ExportAsFixedFormat OutputFileName:=docWord.Path & "\" & tr.Range(, 1) & ".pdf", ExportFormat:=wdExportFormatPDF
+        
+        docWord.Close SaveChanges:=False
+    Next
+    
+    ' Fechar o aplicativo Word
+    wordApp.Quit
+    
+    ' Reativar a atualização automática do Excel
+    Application.ScreenUpdating = True
+End Sub
+
