@@ -1,0 +1,15 @@
+Sub LimparFiltros()
+    Dim planilha As Worksheet
+    Set planilha = ActiveSheet
+    
+    On Error Resume Next
+    planilha.ShowAllData
+    On Error GoTo 0
+    
+    Dim tabela As ListObject
+    For Each tabela In planilha.ListObjects
+        If tabela.AutoFilter.FilterMode Then
+            tabela.AutoFilter.ShowAllData
+        End If
+    Next tabela
+End Sub
