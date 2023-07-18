@@ -7,14 +7,14 @@ Sub SubstituirBarraPorPonto()
     Set ws = ThisWorkbook.Sheets("NOME DA PLANILHA")
     'Substitua "Nome da Planilha" pelo nome da sua planilha
     
-    ' Define o intervalo de células na coluna C
+    ' Define o intervalo de células na coluna C (DEFINA A COLUNA E SUBSITITUA ABAIXO)
     Set rng = ws.Range("C1:C" & ws.Cells(ws.Rows.Count, "C").End(xlUp).Row)
     
     ' Percorre cada célula no intervalo
     For Each cell In rng
-        ' Verifica se a célula contém "/"
+        ' Verifica se a célula contém "DEFINA O CARACTER E SUBSTITUA ABAIXO" 
         If InStr(cell.Value, "/") > 0 Then
-            ' Substitui "/" por "."
+            ' Substitui "/" por "COLOQUE AQUI POR QUAL CARACTER VER QUER SUBSTITUIR"
             cell.Value = Replace(cell.Value, "/", ".")
         End If
     Next cell
