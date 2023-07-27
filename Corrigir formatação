@@ -1,0 +1,25 @@
+Sub CorrigirFormatacao()
+    Dim ws As Worksheet
+    Dim rng As Range
+    Dim cell As Range
+
+    ' Defina a planilha onde as células serão corrigidas
+    Set ws = ThisWorkbook.Sheets("NOME DA PLANILHA")
+
+    ' Defina o intervalo de células que deseja corrigir
+    Set rng = ws.Range("A2:A100")
+
+    ' Desativar atualizações de tela e cálculos para melhorar o desempenho
+    Application.ScreenUpdating = False
+    Application.Calculation = xlCalculationManual
+
+    ' Percorra cada célula no intervalo e pressione "Enter"
+    For Each cell In rng
+        cell.Value = cell.Value
+    Next cell
+
+    ' Reativar atualizações de tela e cálculos
+    Application.ScreenUpdating = True
+    Application.Calculation = xlCalculationAutomatic
+End Sub
+
