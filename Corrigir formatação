@@ -21,5 +21,6 @@ Sub CorrigirFormatacao()
     ' Reativar atualizações de tela e cálculos
     Application.ScreenUpdating = True
     Application.Calculation = xlCalculationAutomatic
+    Msgbox "Concluído"
 End Sub
 
